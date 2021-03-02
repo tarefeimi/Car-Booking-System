@@ -81,7 +81,7 @@ namespace RentalRazorPages.Pages.BookingPages
                 
 
                 var message = new MimeMessage();
-                message.From.Add(new MailboxAddress("Tare", "feimitare123@gmail.com"));
+                message.From.Add(new MailboxAddress("Name", "Email"));
                 message.To.Add(new MailboxAddress("Client ", userEmail));
                 message.Subject = "Thank you for the order ";
                 message.Body = new TextPart("plain")
@@ -93,7 +93,7 @@ namespace RentalRazorPages.Pages.BookingPages
                 using (var client = new SmtpClient())
                 {
                     client.Connect("smtp.gmail.com", 587, false);
-                    client.Authenticate("feimitare123@gmail.com", "Cfofarma1");
+                    client.Authenticate("YourEmail", "YourPass");
                     client.Send(message);
                     client.Disconnect(true);
                 }
