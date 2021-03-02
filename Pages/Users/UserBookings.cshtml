@@ -1,0 +1,50 @@
+﻿@page
+@model RentalRazorPages.Pages.Users.UserBookingsModel
+@{
+}
+
+<table class="table table-striped border">
+
+    <thead>
+        <tr class="table-secondary">
+            <th>
+                Car ID
+            </th>
+            <th>
+                Booked From 
+            </th>
+            <th>
+                Booked To
+            </th>
+            <th>
+                Pick Up Location 
+            </th>
+            <th>
+                Return Location 
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Bookings)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MakinaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PickUpLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnLocation)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

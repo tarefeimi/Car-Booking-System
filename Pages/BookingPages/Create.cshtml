@@ -1,0 +1,102 @@
+﻿@page
+@model RentalRazorPages.Pages.BookingPages.CreateModel
+
+
+
+    <form  method="post">
+        <div id="booking" class="section">
+            <div class="section-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-7 col-md-push-5">
+                            <div class="booking-cta">
+                                <h1>Make your reservation</h1>
+                                <p>
+                                    EXPERIENCE RRP WITH OUR CAR RENTAL OFFERS JUST FOR YOU!
+                                    Save on your next daily or monthly car rental with these deals and offers.
+                                    Book A car Now !
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-md-pull-7">
+                            <div class="booking-form">
+                                <div class="form-group">
+                                    <span class="form-label">Set a Pick Up Location</span>
+                                    <input asp-for="vm.PickUpLocation" class="form-control" type="text" placeholder="Enter a pick-up place">
+                                    <span asp-validation-for="vm.PickUpLocation" class="text-danger"></span>
+                                </div>
+  
+                                <div class="group">
+                                    <input asp-for="ReturnCheckBox" type="checkbox" onchange="showForm(this)" />
+                                    <label asp-for="ReturnCheckBox">Return To same Location</label>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="form-label">Your Return Location</span>
+                                    <input asp-for="vm.ReturnLocation" class="form-control" id="returnForm" type="text" placeholder="Enter a Return Place">
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group" width="152px">
+                                            <span class="form-label">Date From</span>
+                                            <input input asp-for="vm.DateFrom" class="form-control" type="date">
+                                            <span asp-validation-for="vm.DateFrom" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group" width="152px">
+                                            <span class="form-label">Date To</span>
+                                            <input input asp-for="vm.DateTo" class="form-control" type="date">
+                                            <span asp-validation-for="vm.DateTo" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-btn">
+                                    <button type="submit" class="submit-btn">Check availability</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                    @foreach (var item in Model.Makina)
+                    {
+                        <div class="col-md-4" method="post">
+                            <div class="card mb-4 box-shadow">
+                                <img class="card-img-top" src="~/images/@item.ImageName" width="80" alt="Card image cap" />
+                                <div class="card-body">
+                                    <p class="card-text">@Html.DisplayFor(m => item.MarkaId) @Html.DisplayFor(m => item.ModeliId)</p>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">@item.MarkaId</li>
+                                        <li class="list-group-item">@item.Kambjo</li>
+                                        <li class="list-group-item">@item.FuqiaMotorrike</li>
+                                        <li class="list-group-item">@item.Karburanti</li>
+                                    </ul>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <button type="submit" asp-page-handler="Makina" onclick="return confirm('Are you sure you want to book this car ? ') " asp-route-id="@item.MakinaId" class="btn-primary">Rent</button>
+                                        </div>
+                                        <small class="text-muted">@Html.DisplayFor(m => item.VitiProdhimit)</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </form>
+
+<script>
+    function showForm(checkboxElem) {
+        if (checkboxElem.checked) {
+            document.getElementById("returnForm").setAttribute("disabled", "disabled");
+        } else {
+            document.getElementById("returnForm").removeAttribute("disabled");
+        }
+    }
+</script>

@@ -1,0 +1,11 @@
+﻿@page
+@model RentalRazorPages.Pages.BookingPages.DeleteModel
+
+<h3>Are you sure you want to delete the booking ?</h3>
+<div>
+    <form method="post">
+        <input type="hidden" asp-for="Booking.BookingId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

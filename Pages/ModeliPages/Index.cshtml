@@ -1,0 +1,43 @@
+﻿@page
+@model RentalRazorPages.Pages.ModeliPages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table table-striped border">
+    <thead>
+        <tr class="table-secondary">
+            <th>
+                @Html.DisplayNameFor(model => model.Modeli[0].ModeliEmer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Modeli[0].Marka)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Modeli)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModeliEmer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Marka.MarkaEmer)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ModeliId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ModeliId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ModeliId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

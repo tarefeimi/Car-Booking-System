@@ -1,0 +1,72 @@
+﻿@page
+@model RentalRazorPages.Pages.BookingPages.IndexModel
+
+@if (User.IsInRole("Admin"))
+{
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+  }
+
+<table class="table table-striped border">
+    <thead class="table-secondary">
+        <tr>
+            <th>
+                Date From
+            </th>
+            <th>
+                Date To
+            </th>
+            <th>
+                Pick Up
+            </th>
+            <th>
+                Return Location
+            </th>
+            <th>
+                Car Booked Name
+            </th>
+            @if (User.IsInRole("Admin"))
+            {
+                <th>
+                    Users Emails  
+                </th>
+            }
+                <th></th>
+            </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.bookingsAndCustomer.Bookings) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PickUpLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Makina.MakinaEmer)
+            </td>
+            @if (User.IsInRole("Admin"))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserEmail)
+                </td>
+       
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.BookingId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.BookingId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.BookingId">Delete</a>
+                </td>
+            }
+            </tr>
+}
+    </tbody>
+</table>

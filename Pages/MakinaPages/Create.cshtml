@@ -1,0 +1,113 @@
+﻿@page
+@model RentalRazorPages.Pages.MakinaPages.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create a Car</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Makina.MakinaEmer" class="control-label"></label>
+                <input asp-for="Makina.MakinaEmer" class="form-control" />
+                <span asp-validation-for="Makina.MakinaEmer" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Makina.Marka.MarkaEmer" class="control-label"></label>
+                <select asp-for="MarkaId" class="form-control" asp-items="Model.MarkaListdll">
+                    <option disabled selected value="">--- SELECT ---</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Makina.Modeli.ModeliEmer" class="control-label"></label>
+                <select asp-for="ModelId" class="form-control"></select>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Makina.Karburanti" class="control-label"></label>
+                <select asp-for="Makina.Karburanti" class="form-control" asp-items="new SelectList(Enum.GetNames(typeof(RentalRazorPages.Models.Enums.Karburantet)))">
+                    <option disabled selected value="">--- SELECT ---</option>
+                </select>
+                <span asp-validation-for="Makina.Karburanti" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Makina.Kambjo" class="control-label"></label>
+                <select asp-for="Makina.Kambjo" class="form-control" asp-items="new SelectList(Enum.GetNames(typeof(RentalRazorPages.Models.Enums.Kambjot)))">
+                    <option disabled selected value="">--- SELECT ---</option>
+                </select>
+                <span asp-validation-for="Makina.Kambjo" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="Makina.FuqiaMotorrike" class="control-label"></label>
+                <input asp-for="Makina.FuqiaMotorrike" class="form-control" />
+                <span asp-validation-for="Makina.FuqiaMotorrike" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Makina.VitiProdhimit" class="control-label"></label>
+                <input asp-for="Makina.VitiProdhimit" class="form-control" />
+                <span asp-validation-for="Makina.VitiProdhimit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                Photo <input type="file" name="photo" accept="image/*" />
+                <br />
+                <span>
+                    <br />
+                    <img src="@Url.Content(Model.Makina.ImageName)" />
+                </span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+
+        $(function () {
+            debugger;
+            $("#MarkaId").on("change", function () {
+                var makeId = $(this).val();
+                $("#ModelId").empty();
+                $("#ModelId").append("<option value=''>Select Model</option>");
+
+                var a = 1;
+                var b = "1";
+
+                console.log(a == b); //??
+                console.log(a === b);
+
+                $.getJSON(`?handler=SubCategories&MarkaId=${makeId}`, (data) => {
+                    $.each(data, function (i, item) {
+
+                        console.log(item);
+
+                        $("#ModelId").append(`<option value="${item.modeliId}">${item.modeliId}</option>`);
+                    });
+                });
+
+            });
+        });
+    </script>
+}

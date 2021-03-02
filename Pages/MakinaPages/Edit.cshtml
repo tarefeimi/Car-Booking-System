@@ -1,0 +1,74 @@
+﻿@page
+@model RentalRazorPages.Pages.MakinaPages.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Car " @Model.Makina.MakinaEmer "</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Makina.MakinaId" />
+            <div class="form-group">
+                <label asp-for="Makina.MakinaEmer" class="control-label"></label>
+                <input asp-for="Makina.MakinaEmer" class="form-control" />
+                <span asp-validation-for="Makina.MakinaEmer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Makina.MarkaId" class="control-label"></label>
+                <select asp-for="Makina.MarkaId" class="form-control" asp-items="Model.Markat"></select>
+                <span asp-validation-for="Makina.MarkaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Makina.ModeliId" class="control-label"></label>
+                <select asp-for="Makina.ModeliId" class="form-control" asp-items="Model.Modelet"></select>
+                <span asp-validation-for="Makina.ModeliId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Makina.Karburanti" class="control-label"></label>
+                <input asp-for="Makina.Karburanti" class="form-control" />
+                <span asp-validation-for="Makina.Karburanti" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Makina.FuqiaMotorrike" class="control-label"></label>
+                <input asp-for="Makina.FuqiaMotorrike" class="form-control" />
+                <span asp-validation-for="Makina.FuqiaMotorrike" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Makina.Kambjo" class="control-label"></label>
+                <input asp-for="Makina.Kambjo" class="form-control" />
+                <span asp-validation-for="Makina.Kambjo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Makina.VitiProdhimit" class="control-label"></label>
+                <input asp-for="Makina.VitiProdhimit" class="form-control" />
+                <span asp-validation-for="Makina.VitiProdhimit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span>
+                    <img src="~/images/@Model.Makina.ImageName" width="200" />
+                </span>
+            </div>
+            <div class="form-group">
+                               New Photo 
+                <input type="file" name="Photo" accept="image/*" />
+                <br />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
